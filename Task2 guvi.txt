@@ -1,0 +1,295 @@
+1)Code:
+import java.util.Scanner;
+
+class Person {
+    private String name;
+    private int age;
+
+    // Default constructor with  age set to 18
+    public Person() {
+        this.age = 18;
+    }
+
+    // constructor to initialize name and age
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    // Method to display name and age of Person
+    public void displayPersonInfo() {
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+    }
+
+    // Getter and setter methods for name and age
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+}
+
+public class Main3 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Taking user input for name and age
+        System.out.print("Enter name: ");
+        String name = scanner.nextLine();
+
+        System.out.print("Enter age: ");
+        int age = scanner.nextInt();
+
+        // Creating Person object using user input
+        Person person = new Person(name, age);
+
+        // Displaying information of the Person object
+        System.out.println("Person Information:");
+        person.displayPersonInfo();
+    }
+}
+Output:
+Enter name: Praveena Pothi
+Enter age: 22
+Person Information:
+Name: Praveena Pothi
+Age: 22
+
+
+2)Code:
+import java.util.Scanner;
+
+class MyProduct {
+    private int pid;
+    private double price;
+    private int quantity;
+
+    public MyProduct(int pid, double price, int quantity) {
+        this.pid = pid;
+        this.price = price;
+        this.quantity = quantity;
+    }
+
+    public double getTotalPrice() {
+        return price * quantity;
+    }
+
+    public int getPid() {
+        return pid;
+    }
+}
+
+public class Main4 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        MyProduct[] products = new MyProduct[5];
+        for (int i = 0; i < products.length; i++) {
+            System.out.print("Enter Product ID: ");
+            int pid = scanner.nextInt();
+            System.out.print("Enter Price: ");
+            double price = scanner.nextDouble();
+            System.out.print("Enter Quantity: ");
+            int quantity = scanner.nextInt();
+
+            // Create product object and store in the array
+            products[i] = new MyProduct(pid, price, quantity);
+        }
+
+        // Find product with the highest price (bid)
+        double maxPrice = 0;
+        int bid = -1;
+        for (int i = 0; i < products.length; i++) {
+            if (products[i].getTotalPrice() > maxPrice) {
+                maxPrice = products[i].getTotalPrice();
+                bid = i;
+            }
+        }
+
+        // Calculate total amount
+        double totalAmount = 0;
+        for (MyProduct product : products) {
+            totalAmount += product.getTotalPrice();
+        }
+
+        // Display results
+        System.out.println("Product with the highest price (Product ID): " + products[bid].getPid());
+        System.out.println("Total amount spent on all products: $" + totalAmount);
+    }
+}
+Output:
+Enter Product ID: 34567
+Enter Price: 12000
+Enter Quantity: 6
+Enter Product ID: 456789
+Enter Price: 56676
+Enter Quantity: 3
+Enter Product ID: 4567
+Enter Price: 678
+Enter Quantity: 65
+Enter Product ID: 45678
+Enter Price: 46
+Enter Quantity: 4
+Enter Product ID: 1
+Enter Price: 1
+Enter Quantity: 1
+Product with the highest price (Product ID): 456789
+
+3)code:
+import java.util.Scanner;
+
+class Account {
+    private double balance;
+
+    // No-argument constructor
+    public Account() {
+        balance = 0.0;
+    }
+
+    // Constructor with initial balance
+    public Account(double initialBalance) {
+        balance = initialBalance;
+    }
+
+    // deposit the amount to the account
+    public void deposit(double amount) {
+        balance += amount;
+    }
+
+    // withdraw the amount from the account
+    public void withdraw(double amount) {
+        if (balance >= amount) {
+            balance -= amount;
+        } else {
+            System.out.println("Withdrawal unsuccessful.");
+        }
+    }
+
+    // display balance
+    public void displayBalance() {
+        System.out.println("Current Balance:" + balance);
+    }
+}
+
+public class Main5{
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        //  initial balance
+        System.out.print("Enter initial balance:");
+        double initialBalance = scanner.nextDouble();
+        Account myAccount = new Account(initialBalance);
+
+        // deposit amount
+        System.out.print("Enter deposit amount:");
+        double depositAmount = scanner.nextDouble();
+        myAccount.deposit(depositAmount);
+        myAccount.displayBalance();
+
+        // withdrawal amount
+        System.out.print("Enter withdrawal amount:");
+        double withdrawAmount = scanner.nextDouble();
+        myAccount.withdraw(withdrawAmount);
+        myAccount.displayBalance();
+
+        scanner.close();
+    }
+}
+Output:
+Enter initial balance:10000
+Enter deposit amount:2000
+Current Balance:12000.0
+Enter withdrawal amount:7000
+Current Balance:5000.0
+
+4)Code:
+import java.util.Scanner;
+
+interface Tax {
+    double SALE_TAX_PERCENTAGE = 0.07;
+    double INCOME_TAX_PERCENTAGE = 0.105;
+
+    double calculateTax();
+}
+
+class Employee6 implements Tax {
+    private int employeeID;
+    private String name;
+    private double salary;
+
+    public Employee6(int employeeID, String name, double salary) {
+        this.employeeID = employeeID;
+        this.name = name;
+        this.salary = salary;
+    }
+
+    @Override
+    public double calculateTax() {
+        return salary * INCOME_TAX_PERCENTAGE;
+    }
+}
+
+class Product implements Tax {
+    private int pid;
+    private double price;
+    private int quantity;
+
+    public Product(int pid, double price, int quantity) {
+        this.pid = pid;
+        this.price = price;
+        this.quantity = quantity;
+    }
+
+    @Override
+    public double calculateTax() {
+        return price * SALE_TAX_PERCENTAGE * quantity;
+    }
+}
+
+public class Employee2 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Accept employee information
+        System.out.print("Enter Employee ID: ");
+        int employeeID = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline character
+        System.out.print("Enter Employee Name: ");
+        String name = scanner.nextLine();
+        System.out.print("Enter Salary: ");
+        double salary = scanner.nextDouble();
+
+        // Create Employee object
+        Employee employee = new Employee(employeeID, name, salary);
+
+        // Accept product information
+        System.out.print("Enter Product ID: ");
+        int pid = scanner.nextInt();
+        System.out.print("Enter Product Price: ");
+        double price = scanner.nextDouble();
+        System.out.print("Enter Quantity: ");
+        int quantity = scanner.nextInt();
+
+        // Create Product object
+        Product product = new Product(pid, price, quantity);
+
+        // Calculate and display income tax and sale tax
+        double incomeTax = employee.calculateTax();
+        double saleTax = product.calculateTax();
+
+        System.out.println("Income Tax:" + incomeTax);
+        System.out.println("Sale Tax:" + saleTax);
+    }
+}
+
+
